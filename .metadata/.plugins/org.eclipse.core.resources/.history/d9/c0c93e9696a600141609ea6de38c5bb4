@@ -1,0 +1,66 @@
+import java.sql.*;
+import com.mongodb.*;
+
+public class intCRUDBitacoraEnvioCorreos {
+	public static String intCreateBitacoraEnvioCorreos( Connection con, DB db, String sTabla ) {
+		Long lId;
+		Long lCmpId;
+		String sFecha;
+		String sMensaje;
+		String sCreadoPor;
+		String sFechaCreacion;
+		String sModifPor;
+		String sFecModif;
+		String sError;
+		
+		try {
+			PreparedStatement smtBitacoraEnvioCorreos = con.prepareStatement(intSentenciasSQL.intDirList());						
+			ResultSet resBitacoraEnvioCorreos = smtBitacoraEnvioCorreos.executeQuery();
+
+			while (resBitacoraEnvioCorreos.next()) {
+				lId = resBitacoraEnvioCorreos.getLong("ID") ;
+				lCmpId     = resBitacoraEnvioCorreos.getLong("CMP_ID") ;
+				sFecha     = resBitacoraEnvioCorreos.getString("FECHA");
+				sMensaje   = resBitacoraEnvioCorreos.getString("MENSAJE");
+				sCreadoPor = resBitacoraEnvioCorreos.getString("CREADO_POR");
+				sFechaCreacion = resBitacoraEnvioCorreos.getString("FEC_CREACION");
+				sModifPor      = resBitacoraEnvioCorreos.getString("MODIF_POR");
+				sFecModif      = resBitacoraEnvioCorreos.getString("FEC_MODIF");
+				
+				
+				sError =sCreateMDBitacoraEnvioCorreos( db,  sTabla, lId, lCmpId, sFecha, sMensaje, sCreadoPor, sFechaCreacion, sModifPor, sFecModif);
+				if( ! sError.equals("1"))
+					return sError;				
+			}
+		}
+		catch(SQLException sqe)
+		{
+			System.out.println( sqe.getMessage());
+			return sqe.getMessage();
+		}
+		return "0";
+	}
+	
+	private static String sCreateMDBitacoraEnvioCorreos(DB db, String sTabla, Long lId, Long lCmpId, String sFecha, String  sMensaje, String sCreadoPor,  String sFechaCreacion, String sModifPor, String sFecModif) {
+		String sError;
+		try {
+			DBCollection table = db.getCollection(sTabla);
+			BasicDBObject document = new BasicDBObject();
+			document.put("id", lId);
+			document.put("cmp_id", lCmpId);
+			document.put("fecha", sFecha);
+			document.put("mensaje", sMensaje);
+			document.put("creado_por", sCreadoPor);
+			document.put("fec_creacion", sFechaCreacion);
+			document.put("modif_por", sModifPor);
+			document.put("fec_modif", sFecModif);
+			table.insert(document);
+		}
+		catch(Exception e){
+			sError = e.getClass().getName() + ": " + e.getMessage();
+			return sError;
+		}
+		return "1";
+	}
+
+}

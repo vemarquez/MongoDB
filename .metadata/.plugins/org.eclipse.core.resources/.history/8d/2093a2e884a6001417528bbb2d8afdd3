@@ -1,0 +1,23 @@
+import java.sql.*;
+
+public class intCRUDDirList {
+	
+	public static String intCreateDirList( Connection con ) {
+		String FileName;
+		String Tipo;
+		try {
+		PreparedStatement smtDirList = con.prepareStatement(intSentenciasSQL.intDirList());						
+		ResultSet resDisList = smtDirList.executeQuery();
+		
+		while (resDisList.next()) {
+			FileName = resGrado.getLong("GRD_ID");
+		}
+	}
+		catch(SQLException sqe)
+		{
+			System.out.println( sqe.getMessage());
+			return sqe.getMessage();
+		}
+		return "0";
+	}	
+}

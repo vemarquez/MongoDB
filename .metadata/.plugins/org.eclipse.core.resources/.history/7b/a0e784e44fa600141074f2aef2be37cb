@@ -1,0 +1,14 @@
+public class intSentenciasSQL {
+	public static String Diccionario() {
+		String valor;
+		valor = "SELECT TABLE_NAME " +
+                "FROM USER_TABLES " +
+                "WHERE TABLE_NAME NOT IN ( 'IN_CLIENTES_TEMP','INT_CLIENTES_CARGA','INT_CLIENTES_INMOBILIARIA' " +
+                         ",'INT_CLIENTES_RESP_19092013','INT_CLIENTES_SERVICIOS', 'INT_DIR_CLIENTES_CARGA' " +
+                         ",'OSO', 'XX_FECHAS') " +
+                         "ORDER BY 1";
+		return valor;
+	}
+		
+
+}

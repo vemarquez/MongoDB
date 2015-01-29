@@ -1,0 +1,31 @@
+import java.sql.*;
+import com.mongodb.*;
+
+public class intCRUDDirList {
+	
+	public static String intCreateDirList( Connection con, DB db, String sTabla ) {
+		String sFileName;
+		String sTipo;
+		try {
+		PreparedStatement smtDirList = con.prepareStatement(intSentenciasSQL.intDirList());						
+		ResultSet resDisList = smtDirList.executeQuery();
+		
+		while (resDisList.next()) {
+			sFileName = resDisList.getString("FILENAME");
+			sTipo     = resDisList.getString("TIPO");
+			System.out.println( "File Name " + sFileName + " Tipo " + sTipo );
+			intCreateMDDirList( db,  sTabla, sFileName, sTipo );
+		}
+	}
+		catch(SQLException sqe)
+		{
+			System.out.println( sqe.getMessage());
+			return sqe.getMessage();
+		}
+		return "0";
+	}
+	
+	public intCreateMDDirList( DB db, String sTabla, String sFileName, Sting sTipo ) {
+		
+	}
+}

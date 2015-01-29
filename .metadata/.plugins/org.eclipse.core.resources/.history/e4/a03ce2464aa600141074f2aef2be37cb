@@ -1,0 +1,20 @@
+import java.sql.Connection;
+import com.mongodb.*;
+
+public static Connection conOracle = null;
+
+public class CreateCollections {
+    public static void main(String[] args) {
+    	String StrInterfaz = "interfaz";
+    	try{   
+    		 // To connect to mongodb server
+    	         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+    	         // Now connect to your databases
+    	         DB db = mongoClient.getDB( StrInterfaz );
+    		 System.out.println("Connect to database successfully la base de datos es " + StrInterfaz );
+    		 }catch(Exception e){
+	     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	  }
+    }
+
+}
