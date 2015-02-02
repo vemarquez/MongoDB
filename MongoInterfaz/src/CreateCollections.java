@@ -87,6 +87,9 @@ public class CreateCollections {
                         else if (sTabla.equals("int_bitacora_envio_correos")) {
                         	intCRUDBitacoraEnvioCorreos.intCreateBitacoraEnvioCorreos(conOracle, db, sTabla);
                         }
+                        else if (sTabla.equals("int_clientes")) {
+                        	intCRUDClientes.intCreateClientes(conOracle, db, sTabla);
+                        }
 
 						/*BasicDBObject document1 = new BasicDBObject();
 						document1.put("filename", "paso");

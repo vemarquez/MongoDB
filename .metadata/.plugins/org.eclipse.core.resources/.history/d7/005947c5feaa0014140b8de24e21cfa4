@@ -1,0 +1,145 @@
+import java.sql.*;
+import com.mongodb.*;
+
+public class intCRUDClientes {
+	public static String intCreateClientes( Connection con, DB db, String sTabla ) {
+		Long lId;
+		String sRFC;
+		String sNombre;
+		Long lNumeroCliente;
+		String sDireccion;
+		String sNumero;
+		String sNumeroInterior;
+		String sColonia;
+		String sLocalidad;
+		String sReferencia;
+		String sMunicipio;
+		String sEstado;
+		String sPais;
+		String sCP;
+		String sVatId;
+		String sCorreo;
+		String sCorreoCC;
+		String sCorreoCO;
+		String sCreadoPor;
+		String sFechaCreacion;
+		String sModifPor;
+		String sFecModif;
+
+		String sError;
+		
+		try {
+			PreparedStatement smtClientes = con.prepareStatement(intSentenciasSQL.intClientes());						
+			ResultSet resClientes = smtClientes.executeQuery();
+
+			while (resClientes.next()) {
+				lId = resClientes.getLong("ID") ;
+				sNombre = resClientes.getString("NOMBRE");				
+				lNumeroCliente = resClientes.getLong("NUMERO_CLIENTE") ;
+				sDireccion = resClientes.getString("DIRECCION");
+				sNumero = resClientes.getString("NUMERO");
+				sNumeroInterior = resClientes.getString("NUMERO_INTERIOR");
+				sColonia = resClientes.getString("COLONIA");
+				sLocalidad = resClientes.getString("LOCALIDAD");
+				sReferencia = resClientes.getString("REFERENCIA");
+				sMunicipio = resClientes.getString("MUNICIPIO");
+				sEstado = resClientes.getString("ESTADO");
+				sPais = resClientes.getString("PAIS");
+				sCP = resClientes.getString("CP");
+				sVatId = resClientes.getString("VAT_ID");
+				sCorreo = resClientes.getString("CORREO");
+				sCorreoCC = resClientes.getString("CORREO_CC");
+				sCorreoCO = resClientes.getString("CORREO_CO");
+				sCreadoPor = resClientes.getString("CREADO_POR");
+				sFechaCreacion = resClientes.getString("FEC_CREACION");
+				sModifPor      = resClientes.getString("MODIF_POR");
+				sFecModif      = resClientes.getString("FEC_MODIF");
+								
+				sError = sCreateMDClientes( db,  sTabla, lId,lNumeroCliente );
+				if( ! sError.equals("1"))
+					return sError;				
+			}
+		}
+		catch(SQLException sqe)
+		{
+			System.out.println( sqe.getMessage());
+			return sqe.getMessage();
+		}
+		return "0";
+	}
+	
+	private static String sCreateMDClientes(DB db, String sTabla, long lId, long lNumeroCliente  ) {
+		String sError;
+		try {
+			DBCollection table = db.getCollection(sTabla);
+			BasicDBObject document = new BasicDBObject();
+			document.put("id", lId);
+			document.put("NumeroCliente", lNumeroCliente);
+			/*document.put("fecha", sFecha);
+			document.put("mensaje", sMensaje);
+			document.put("creado_por", sCreadoPor);
+			document.put("fec_creacion", sFechaCreacion);
+			document.put("modif_por", sModifPor);
+			document.put("fec_modif", sFecModif);*/
+			table.insert(document);
+		}
+		catch(Exception e){
+			sError = e.getClass().getName() + ": " + e.getMessage();
+			return sError;
+		}
+		return "1";
+	}
+
+}
+
+
+/*
+lid
+srfc
+snombre
+lnumerocliente
+sdireccion
+snumero
+snumerointerior
+scolonia
+slocalidad
+sreferencia
+smunicipio
+sestado
+spais
+scp
+svatid
+scorreo
+scorreocc
+scorreoco
+screadopor
+sfechacreacion
+smodifpor
+sfecmodif
+
+
+
+SELECT ID ID " +
+",RFC RFC " +
+",NOMBRE NOMBRE " +
+",NUMERO_CLIENTE NUMERO_CLIENTE " +
+",DIRECCION DIRECCION " +
+",NUMERO NUMERO " +
+",NUMERO_INTERIOR NUMERO_INTERIOR " +
+",COLONIA COLONIA " +
+",LOCALIDAD LOCALIDAD " +
+",REFERENCIA REFERENCIA " +
+",MUNICIPIO MUNICIPIO " +
+",ESTADO ESTADO " +
+",PAIS PAIS " +
+",CP CP " +
+",VAT_ID VAT_ID " +
+",CORREO CORREO " +
+",CORREO_CC CORREO_CC " +
+",CORREO_CO CORREO_CO " +
+",CREADO_POR CREADO_POR " +
+",TO_CHAR(FEC_CREACION, 'DD-MM-RRRR HH24:MI:SS') FEC_CREACION " +
+",MODIF_POR MODIF_POR " +
+",TO_CHAR(FEC_MODIF,'DD-MM-RRRR HH24:MI:SS') FEC_MODIF " +
+"FROM INT_CLIENTES " +
+"ORDER BY ID";*/

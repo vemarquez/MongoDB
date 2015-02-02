@@ -7,7 +7,8 @@ public class intSentenciasSQL {
 				/*"WHERE TABLE_NAME NOT IN ( 'IN_CLIENTES_TEMP','INT_CLIENTES_CARGA','INT_CLIENTES_INMOBILIARIA' " +
 				",'INT_CLIENTES_RESP_19092013','INT_CLIENTES_SERVICIOS', 'INT_DIR_CLIENTES_CARGA' " +
 				",'OSO', 'XX_FECHAS') " +
-				"ORDER BY 1";*/
+				"ORDER BY 1";
+				'INT_CLIENTES'";*/
 		return valor;
 	}
 	
@@ -33,12 +34,33 @@ public class intSentenciasSQL {
 				"ORDER BY ID";
 		return valor;
 	}
-}
-/*",CMP_ID CMP_ID " + 
-				",TO_CHAR(FECHA,'DD-MM-RRRR HH24:MI:SS') FECHA " +
-				",MENSAJE MENSAJE " +
-				",CREADO_POR CREADO_POR" +
+	public static String intClientes() {
+		String valor;
+		valor = "SELECT ID ID " +
+				",RFC RFC " +
+				",NOMBRE NOMBRE " +
+				",NUMERO_CLIENTE NUMERO_CLIENTE " +
+				",DIRECCION DIRECCION " +
+				",NUMERO NUMERO " +
+				",NUMERO_INTERIOR NUMERO_INTERIOR " +
+				",COLONIA COLONIA " +
+				",LOCALIDAD LOCALIDAD " +
+				",REFERENCIA REFERENCIA " +
+				",MUNICIPIO MUNICIPIO " +
+				",ESTADO ESTADO " +
+				",PAIS PAIS " +
+				",CP CP " +
+				",VAT_ID VAT_ID " +
+				",CORREO CORREO " +
+				",CORREO_CC CORREO_CC " +
+				",CORREO_CO CORREO_CO " +
+				",CREADO_POR CREADO_POR " +
 				",TO_CHAR(FEC_CREACION, 'DD-MM-RRRR HH24:MI:SS') FEC_CREACION " +
 				",MODIF_POR MODIF_POR " +
-				",TO_CHAR (FEC_MODIF, 'DD-MM-RRRR HH24:MI:SS') FEC_MODIF " +
-				"FROM INT_BITACORA_ENVIO_CORREOS " +*/
+				",TO_CHAR(FEC_MODIF,'DD-MM-RRRR HH24:MI:SS') FEC_MODIF " +
+				"FROM INT_CLIENTES " +
+				"ORDER BY ID";
+		return valor;
+	}
+}
+
