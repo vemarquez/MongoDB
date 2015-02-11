@@ -1,0 +1,55 @@
+import java.sql.*;
+import com.mongodb.*;
+
+
+
+public class intCRUDUserExitDetalleSystem {
+	
+	public static String intCreateUserExitDetalleSystem( Connection con, DB db, String sTabla ) {		
+		Long lId;									
+		Long lIdTarea
+		String sSalida
+		String sError;
+		
+		try {
+			PreparedStatement smtUserExitDetalleSystem = con.prepareStatement(intSentenciasSQL.intUserExitDetalleSystem()); 
+			ResultSet resUserExitDetalleSystem = smtUserExitDetalleSystem.executeQuery();
+			while (resUserExitDetalleSystem.next()) {				
+				lId = resUserExitDetalleSystem.getLong("ID_DETALLE");				
+				lIdTarea = resUserExitDetalleSystem.getLong("ID_TAREA");				
+				sSalida = resUserExitDetalleSystem.getString("SALIDA");				
+				
+								
+				sError = sCreateMDUserExitDetalleSystem( db,  sTabla, lId, sSalida );
+				arrDatos = new String[12];
+				if( ! sError.equals("1"))
+					return sError;				
+			}
+		}
+		catch(SQLException sqe)
+		{
+			System.out.println( sqe.getMessage());
+			return sqe.getMessage();
+		}
+		return "0";
+	}
+	
+	private static String sCreateMDUserExitDetalleSystem(DB db, String sTabla, long lId, String sSalida ) {
+		String sError;
+		try {
+			DBCollection table = db.getCollection(sTabla);
+			BasicDBObject document = new BasicDBObject();
+			document.put("id_detalle", lId);
+			document.put("id_tarea", lIdTarea);
+			document.put("salida",sSalida);			
+			
+			table.insert(document);
+		}
+		catch(Exception e){
+			sError = e.getClass().getName() + ": " + e.getMessage();
+			return sError;
+		}
+		return "1";
+	}
+
+}

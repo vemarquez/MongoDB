@@ -90,12 +90,36 @@ public class CreateCollections {
                         else if (sTabla.equals("int_clientes")) {
                         	intCRUDClientes.intCreateClientes(conOracle, db, sTabla);
                         }
-
-						/*BasicDBObject document1 = new BasicDBObject();
-						document1.put("filename", "paso");
-						document1.put("tipo", "archivo");
-						getTabla.insert(document1);*/
-
+                        else if (sTabla.equals("int_companias")) {
+                        	intCRUDCompanias.intCreateCompanias(conOracle, db, sTabla);
+                        }
+                        else if (sTabla.equals("int_estatus_comprobantes")) {
+                        	intCRUDEstatusComprobantes.intEstatusComprobantes( conOracle, db, sTabla);
+                        }
+                        else if (sTabla.equals("int_estatus_correo_electronico")) {
+                        	intCRUDEstatusCorreoElectronico.intEstatusCorreoElectronico( conOracle, db, sTabla);
+                        }
+                        else if (sTabla.equals("int_log_carga_comprobantes")) {
+                        	intCRUDLogCargaComprobantes.intCreateLogCargaComprobantes(conOracle, db, sTabla);
+                        }
+                        else if (sTabla.equals("int_seleccion_comprobantes")) {
+                        	intCRUDSeleccionComprobantes.intSeleccionComprobantes(conOracle, db, sTabla);
+                        }
+                        else if (sTabla.equals("int_tipo_comprobante_ar_um")) {
+                        	intCRUDTipoComprobanteARUM.intCreateTipoComprobanteARUM(conOracle, db, sTabla);
+                        }
+                        else if (sTabla.equals("int_user_exit_system")) {
+                        	intCRUDUserExitSystem.intCreateUserExitSystem(conOracle, db, sTabla);
+                        }
+                        else if (sTabla.equals("int_user_exit_detalle_system")) {
+                        	intCRUDUserExitDetalleSystem.intCreateUserExitDetalleSystem(conOracle, db, sTabla);
+                        }
+                        else if (sTabla.equals("int_comprobantes")) {
+                        	intCRUDComprobantes.intCreateComprobantes(conOracle, db, sTabla);
+                        }
+                        else if (sTabla.equals("int_detalle_comprobantes")) {
+                        	intCRUDDetalleComprobantes.intCreateDetalleComprobantes(conOracle, db, sTabla);
+                        }					
 					}
 					catch(Exception e){
 						System.err.println( e.getClass().getName() + ": " + e.getMessage() );

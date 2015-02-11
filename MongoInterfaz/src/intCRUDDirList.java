@@ -14,7 +14,6 @@ public class intCRUDDirList {
 			while (resDisList.next()) {
 				sFileName = resDisList.getString("FILENAME");
 				sTipo     = resDisList.getString("TIPO");
-				System.out.println( "File Name " + sFileName + " Tipo " + sTipo );
 				sError =sCreateMDDirList( db,  sTabla, sFileName, sTipo );
 				if( ! sError.equals("1"))
 					return sError;				
